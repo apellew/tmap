@@ -209,7 +209,7 @@ WITH data AS (
 	    '  (SELECT pit.id FROM tmap_v0.page_item_type pit WHERE name = ''' || pit.name || '''), -- type_id' || CHR(13) ||
 	    '  ''' || REPLACE(pi.title, '''', '''''') || ''', -- title' || CHR(13) ||
 	    '  (SELECT id FROM tmap_v0.description_type WHERE name = ''' || dt.name || '''), -- description_type_id' || CHR(13) ||
-	    '  ''' ||  REPLACE(REPLACE(pi.description, CHR(13), ''' || CHR(13) || '''), '''', '''''') || ''', -- description' || CHR(13) ||
+      '  ''' ||  REPLACE(REPLACE(pi.description, '''', '’'), CHR(13), ''' || CHR(13) || ''') || ''', -- description' || CHR(13) ||
 	    '  ' || pi.x_start::TEXT || ', -- x_start' || CHR(13) ||
 	    '  ' || pi.y_start::TEXT || ', -- y_start' || CHR(13) ||
 	    '  ' || pi.spanWidth::TEXT || ', -- spanWidth' || CHR(13) ||
