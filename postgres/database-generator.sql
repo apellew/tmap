@@ -11,9 +11,14 @@ WITH data AS (
         '-- 0000: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --' || CHR(13) ||
         '-- ' AS insert_sql
 	UNION 
+	SELECT 0010 AS order_by, 
+        CHR(13) || '-- 0010: Create a new schema for the data' || CHR(13) || 
+        '  DROP SCHEMA IF EXISTS tmap_v0 CASCADE;' || CHR(13) ||
+	    '  CREATE SCHEMA tmap_v0;' || CHR(13) || CHR(13) AS insert_sql
+	UNION
     SELECT
-        0001 AS order_by,
-        '-- 0001: Add in a function to return table and row counts' || CHR(13) ||
+        0011 AS order_by,
+        '-- 0011: Add in a function to return table and row counts' || CHR(13) ||
         '  CREATE OR REPLACE FUNCTION tmap_v0.get_table_row_counts_v0() RETURNS TEXT AS $$' || CHR(13) ||
         '  DECLARE' || CHR(13) ||
         '    -- This function is used to get a count from all the tables in the schema' || CHR(13) ||
@@ -35,11 +40,6 @@ WITH data AS (
         '    RETURN result_string;' || CHR(13) ||
         '  END;' || CHR(13) ||
         '  $$ LANGUAGE plpgsql;' || CHR(13)
-	UNION
-	SELECT 0010 AS order_by, 
-        CHR(13) || '-- 0010: Create a new schema for the data' || CHR(13) || 
-        '  DROP SCHEMA IF EXISTS tmap_v0 CASCADE;' || CHR(13) ||
-	    '  CREATE SCHEMA tmap_v0;' || CHR(13) || CHR(13) AS insert_sql
 	UNION
     SELECT 0020 AS order_by, 
         CHR(13) || '-- 0020: Create a table for publishers' || CHR(13) ||  
@@ -196,7 +196,7 @@ WITH data AS (
 	SELECT
 	    0150 AS order_by,
 		' ' || CHR(13) ||
-		'-- tmap_v0.page_item: Page ' || LPAD(p.page_number::TEXT, 4, '0') || ' item ' || LPAD(pi.order_by::TEXT, 2, '0') || CHR(13) ||
+		'-- 0150: Page ' || LPAD(p.page_number::TEXT, 4, '0') || ' item ' || LPAD(pi.order_by::TEXT, 2, '0') || CHR(13) ||
 		'INSERT INTO tmap_v0.page_item(page_id, order_by, key, type_id, title, description_type_id, description, x_start, y_start, spanWidth, spanHeight)' || CHR(13) ||
 	    'VALUES (' || CHR(13) ||
 	    '  (SELECT p.id' || CHR(13) ||
