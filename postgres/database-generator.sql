@@ -205,7 +205,7 @@ WITH data AS (
 	    '  WHERE p.page_number = ' || p.page_number::TEXT || CHR(13) ||
 	    '  AND i.name = ''' || i.name ||'''), -- page_id' || CHR(13) ||
 	    '  ' || pi.order_by::TEXT || ', -- order_by' || CHR(13) ||
-	    '  ''I' || pi.order_by::TEXT ||''', -- key' || CHR(13) ||
+	    '  ''I' || LPAD(pi.order_by::TEXT, 2, '0') ||''', -- key' || CHR(13) ||
 	    '  (SELECT pit.id FROM tmap_v0.page_item_type pit WHERE name = ''' || pit.name || '''), -- type_id' || CHR(13) ||
 	    '  ''' || REPLACE(pi.title, '''', '''''') || ''', -- title' || CHR(13) ||
 	    '  (SELECT id FROM tmap_v0.description_type WHERE name = ''' || dt.name || '''), -- description_type_id' || CHR(13) ||
